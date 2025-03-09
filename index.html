@@ -28,11 +28,6 @@
         .intro {
             text-align: justify;
             font-size: 14px;
-            position: sticky;
-            top: 0;
-            background: white;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
         }
 
         .question {
@@ -65,8 +60,7 @@
         <h1>Échelle de Kern - Dépendance au Sport</h1>
         <p class="intro">
             Ce questionnaire évalue votre relation avec le sport à travers 21 questions. 
-            Sélectionnez la réponse qui correspond le mieux à votre ressenti entre 1 et 6 :<br>
-            1 = Jamais, 2 = Rarement, 3 = De temps en temps, 4 = Souvent, 5 = Très souvent, 6 = Toujours
+            Sélectionnez la réponse qui correspond le mieux à votre ressenti.
         </p>
         
         <form id="quiz-form">
@@ -100,6 +94,17 @@
             "Je privilégie l'exercice à d'autres activités sociales ou professionnelles.",
             "Lorsque je fais moins d'exercice, je ressens des effets négatifs sur mon humeur.",
             "J'augmente l'intensité de mon entraînement pour ressentir les mêmes effets.",
+            "Même lorsque je veux arrêter de m'entraîner, je continue.",
+            "Je ressens une perte de contrôle sur ma pratique du sport.",
+            "J'ai déjà menti sur la quantité d'exercice que je fais.",
+            "J'ai besoin de faire plus d'exercice pour ressentir les mêmes bienfaits qu'auparavant.",
+            "Si je ne peux pas m'entraîner, je ressens un mal-être.",
+            "Je ressens une culpabilité ou une anxiété lorsque je ne m'entraîne pas.",
+            "Je continue mon exercice même si cela cause des blessures ou des problèmes de santé.",
+            "Je fais de l'exercice au détriment de mes obligations (travail, famille, études).",
+            "Mon entourage s'inquiète de ma pratique excessive du sport.",
+            "J'organise mon emploi du temps principalement en fonction de mes séances de sport.",
+            "J'éprouve du plaisir et du soulagement seulement après avoir fait de l'exercice."
         ];
 
         const categories = {
@@ -114,7 +119,7 @@
 
         function createQuestions() {
             const container = document.getElementById("questions-container");
-            
+
             questions.forEach((q, index) => {
                 let questionDiv = document.createElement("div");
                 questionDiv.classList.add("question");
@@ -160,8 +165,8 @@
 
             let resultText = "";
             Object.keys(scores).forEach(cat => {
-                let sum = scores[cat].reduce((a, b) => a + b, 0);
-                resultText += `<strong>${cat} :</strong> ${sum}/6<br>`;
+                let avg = scores[cat].reduce((a, b) => a + b, 0) / scores[cat].length;
+                resultText += `<strong>${cat} :</strong> ${avg.toFixed(2)}<br>`;
             });
 
             document.getElementById("result-text").innerHTML = resultText;
@@ -174,4 +179,3 @@
     </script>
 </body>
 </html>
-
