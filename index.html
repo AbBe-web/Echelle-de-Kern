@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Échelle de Kern - Dépendance au Sport</title>
+    <title>Échelle de Kern (EDS-R) - Dépendance au Sport</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,7 +11,22 @@
             padding: 0;
             background-color: #f4f4f4;
         }
+    .fixed-intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
 
+    .container {
+        margin-top: 100px; /* Ajuste pour éviter que le texte ne soit caché sous l'intro fixe */
+    }
+
+        
         .container {
             max-width: 600px;
             margin: 20px auto;
@@ -58,9 +73,9 @@
 <body>
     <div class="container">
         <h1>Échelle de Kern - Dépendance au Sport</h1>
-        <p class="intro">
+       <p class="intro fixed-intro">
             Ce questionnaire évalue votre relation avec le sport à travers 21 questions. 
-            Sélectionnez la réponse qui correspond le mieux à votre ressenti.
+            Sélectionnez la réponse qui correspond le mieux à votre ressenti en choississant un chiffre entre 1 (Jamais) à 6 (Toujours) : 1 = Jamais, 2 = Rarement, 3 = De temps en temps, 4 = Souvent, 5 = Très souvent, 6 = Toujours.
         </p>
         
         <form id="quiz-form">
@@ -75,8 +90,10 @@
 
         <div id="info-form" class="hidden">
             <h2>Informations personnelles</h2>
-            <label>Nom : <input type="text" id="nom"></label>
-            <label>Prénom : <input type="text" id="prenom"></label>
+            <label>Nom :</label>  
+            <input type="text" id="nom"><br>  
+            <label>Prénom :</label>  
+            <input type="text" id="prenom">
             <label>Date : <input type="text" id="date" readonly></label>
             <button onclick="window.print()">À Imprimer</button>
         </div>
@@ -108,13 +125,13 @@
         ];
 
         const categories = {
-            "Tolérance": [1, 10, 14],
-            "Sevrage": [4, 7, 9, 15],
-            "Perte de contrôle": [3, 6, 11, 12],
-            "Intention": [5, 16],
-            "Temps": [2, 20],
-            "Réduction des autres activités": [8, 18, 19],
-            "Continuité": [13, 17, 21]
+            "Tolérance (augmentation de l'intensité et du volume d'entraînement)": [1, 10, 14],
+            "Sevrage (effets négatifs en cas d'arrêt)": [4, 7, 9, 15],
+            "Perte de contrôle (incapacité à limiter l'exercice)": [3, 6, 11, 12],
+            "Intention (pratique plus importante que prévue)": [5, 16],
+            "Temps (temps excessif consacré au sport)": [2, 20],
+            "Réduction des autres activités (impact sur la vie sociale/professionnelle)": [8, 18, 19],
+            "Continuité (poursuite malgré des conséquences négatives)": [13, 17, 21]
         };
 
         function createQuestions() {
@@ -165,11 +182,12 @@
 
             let resultText = "";
             Object.keys(scores).forEach(cat => {
-                let avg = scores[cat].reduce((a, b) => a + b, 0) / scores[cat].length;
-                resultText += `<strong>${cat} :</strong> ${avg.toFixed(2)}<br>`;
+                let sum = scores[cat].reduce((a, b) => a + b, 0);
+                resultText += `<strong>${cat} :</strong> ${sum}/6<br>`;
             });
 
-            document.getElementById("result-text").innerHTML = resultText;
+            document.getElementById("result-text").innerHTML = resultText + 
+            "<p><strong>Plus vos scores sont proches de 6 sur un grand nombre des 7 dimensions, plus le risque de dépendance à l'activité physique est élevé.</strong> Les résultats sont cependant à analyser en fonction de votre contexte individuel et, si nécessaire, avec un professionnel de santé ou de psychologie du sport.</p>";
             document.getElementById("results").classList.remove("hidden");
             document.getElementById("info-form").classList.remove("hidden");
             document.getElementById("date").value = new Date().toLocaleDateString();
