@@ -161,10 +161,10 @@
             Object.keys(scores).forEach(cat => {
                 let sum = scores[cat].reduce((a, b) => a + b, 0);
                 let avg = sum / scores[cat].length;
-                resultText += `<strong>${cat} :</strong> ${avg.toFixed(2)} / 6<br>`;
+                resultText += `<strong>${cat} :</strong> ${avg.toFixed(1)} / 6<br>`;
             });
             document.getElementById("result-text").innerHTML = resultText +
-            "<p><strong>Plus vos scores sont proches de 6 sur un grand nombre des 7 dimensions, plus le risque de dépendance à l'activité physique est élevé.</strong> Les résultats sont cependant à analyser en fonction de votre contexte individuel et, si nécessaire, avec un professionnel de santé ou de psychologie du sport.</p>";
+            "<p><strong>Plus vos scores sont proches de 6 sur un plus grand nombre des 7 dimensions, plus le risque de dépendance à l'activité physique est élevé.</strong> Les résultats sont cependant à analyser en fonction de votre contexte individuel et, si nécessaire, avec un professionnel de santé ou de psychologie du sport.</p>";
             document.getElementById("results").classList.remove("hidden");
             document.getElementById("info-form").classList.remove("hidden");
             document.getElementById("date").value = new Date().toLocaleDateString();
