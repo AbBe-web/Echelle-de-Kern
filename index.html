@@ -11,23 +11,18 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-    .fixed-intro {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: white;
-        padding: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-    }
-
-    .container {
-        margin-top: 100px; /* Ajuste pour éviter que le texte ne soit caché sous l'intro fixe */
-    }
-
-        
+        .fixed-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
         .container {
+            margin-top: 100px; /* Ajuste pour éviter que le texte ne soit caché sous l'intro fixe */
             max-width: 600px;
             margin: 20px auto;
             background: white;
@@ -35,24 +30,19 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         h1, h2 {
             text-align: center;
         }
-
         .intro {
             text-align: justify;
             font-size: 14px;
         }
-
         .question {
             margin-bottom: 15px;
         }
-
         .hidden {
             display: none;
         }
-
         button {
             display: block;
             width: 100%;
@@ -64,7 +54,6 @@
             border-radius: 5px;
             font-size: 16px;
         }
-
         button:hover {
             background: #218838;
         }
@@ -73,32 +62,28 @@
 <body>
     <div class="container">
         <h1>Échelle de Kern (EDS-R) - Dépendance au Sport</h1>
-       <p class="intro fixed-intro">
-            Ce questionnaire évalue votre relation avec le sport à travers 21 questions. 
+        <p class="intro fixed-intro">
+            Ce questionnaire évalue votre relation avec le sport à travers 21 questions.
             Sélectionnez la réponse qui correspond le mieux à votre ressenti en choississant un chiffre entre 1 (Jamais) à 6 (Toujours) : 1 = Jamais, 2 = Rarement, 3 = De temps en temps, 4 = Souvent, 5 = Très souvent, 6 = Toujours.
         </p>
-        
         <form id="quiz-form">
             <div id="questions-container"></div>
             <button type="button" onclick="calculateResults()">Soumettre</button>
         </form>
-
         <div id="results" class="hidden">
             <h2>Résultats</h2>
             <p id="result-text"></p>
         </div>
-
         <div id="info-form" class="hidden">
             <h2>Informations personnelles</h2>
-            <label>Nom :</label>  
-            <input type="text" id="nom"><br>  
-            <label>Prénom :</label>  
+            <label>Nom :</label>
+            <input type="text" id="nom"><br>
+            <label>Prénom :</label>
             <input type="text" id="prenom">
             <label>Date : <input type="text" id="date" readonly></label>
             <button onclick="window.print()">À Imprimer</button>
         </div>
     </div>
-
     <script>
         const questions = [
             "Je pense à l'exercice physique tout au long de la journée.",
@@ -125,23 +110,21 @@
         ];
 
         const categories = {
-            "Tolérance (augmentation de l'intensité et du volume d'entraînement)": [1, 10, 14],
-            "Sevrage (effets négatifs en cas d'arrêt)": [4, 7, 9, 15],
-            "Perte de contrôle (incapacité à limiter l'exercice)": [3, 6, 11, 12],
-            "Intention (pratique plus importante que prévue)": [5, 16],
-            "Temps (temps excessif consacré au sport)": [2, 20],
-            "Réduction des autres activités (impact sur la vie sociale/professionnelle)": [8, 18, 19],
-            "Continuité (poursuite malgré des conséquences négatives)": [13, 17, 21]
+            "Sevrage (withdrawal)": [1, 8, 15],
+            "Continuité (continuance)": [2, 9, 16],
+            "Tolérance (tolerance)": [3, 10, 17],
+            "Manque de contrôle (lack of control)": [4, 11, 18],
+            "Réduction des autres activités (reduction in others activities)": [5, 12, 19],
+            "Temps (time)": [6, 13, 20],
+            "Intention (intention effects)": [7, 14, 21]
         };
 
         function createQuestions() {
             const container = document.getElementById("questions-container");
-
             questions.forEach((q, index) => {
                 let questionDiv = document.createElement("div");
                 questionDiv.classList.add("question");
                 questionDiv.innerHTML = `<p>${index + 1}. ${q}</p>`;
-                
                 for (let i = 1; i <= 6; i++) {
                     questionDiv.innerHTML += `
                         <label>
@@ -149,7 +132,6 @@
                         </label>
                     `;
                 }
-                
                 container.appendChild(questionDiv);
             });
         }
@@ -157,16 +139,13 @@
         function calculateResults() {
             let scores = {};
             Object.keys(categories).forEach(cat => scores[cat] = []);
-
             let missingAnswers = false;
-
             questions.forEach((_, index) => {
                 let selected = document.querySelector(`input[name="q${index}"]:checked`);
                 if (!selected) {
                     missingAnswers = true;
                     return;
                 }
-
                 let value = parseInt(selected.value);
                 Object.keys(categories).forEach(cat => {
                     if (categories[cat].includes(index + 1)) {
@@ -174,29 +153,24 @@
                     }
                 });
             });
-
             if (missingAnswers) {
                 alert("Veuillez répondre à toutes les questions.");
                 return;
             }
-
             let resultText = "";
             Object.keys(scores).forEach(cat => {
-    let sum = scores[cat].reduce((a, b) => a + b, 0);  // Somme des scores
-    let avg = sum / scores[cat].length;  // Moyenne sur la sous-dimension
-    resultText += `<strong>${cat} :</strong> ${avg.toFixed(2)} / 6<br>`;
-});
-
+                let sum = scores[cat].reduce((a, b) => a + b, 0);
+                let avg = sum / scores[cat].length;
+                resultText += `<strong>${cat} :</strong> ${avg.toFixed(2)} / 6<br>`;
             });
-
-            document.getElementById("result-text").innerHTML = resultText + 
+            document.getElementById("result-text").innerHTML = resultText +
             "<p><strong>Plus vos scores sont proches de 6 sur un grand nombre des 7 dimensions, plus le risque de dépendance à l'activité physique est élevé.</strong> Les résultats sont cependant à analyser en fonction de votre contexte individuel et, si nécessaire, avec un professionnel de santé ou de psychologie du sport.</p>";
             document.getElementById("results").classList.remove("hidden");
             document.getElementById("info-form").classList.remove("hidden");
             document.getElementById("date").value = new Date().toLocaleDateString();
         }
-
         window.onload = createQuestions;
     </script>
 </body>
 </html>
+
