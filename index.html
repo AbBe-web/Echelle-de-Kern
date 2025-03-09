@@ -148,7 +148,11 @@
                 document.querySelectorAll(`input[name="q${currentQuestionIndex}"]`).forEach(input => {
                     input.addEventListener("change", handleAnswer);
                 });
-                questionDiv.scrollIntoView({ behavior: "smooth", block: "end" });
+                // Utilisation de window.scrollTo pour un défilement fluide
+                window.scrollTo({
+                    top: questionDiv.offsetTop,
+                    behavior: "smooth"
+                });
             } else {
                 document.querySelector("button").classList.remove("hidden");
             }
