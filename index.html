@@ -111,13 +111,13 @@
         ];
 
         const categories = {
-            "Sevrage (withdrawal)": [1, 8, 15],
-            "Continuité (continuance)": [2, 9, 16],
-            "Tolérance (tolerance)": [3, 10, 17],
-            "Manque de contrôle (lack of control)": [4, 11, 18],
-            "Réduction des autres activités (reduction in others activities)": [5, 12, 19],
-            "Temps (time)": [6, 13, 20],
-            "Intention (intention effects)": [7, 14, 21]
+            "Sevrage (effets négatifs en cas d'arrêt)": [1, 8, 15],
+            "Continuité (poursuite malgré des conséquences négatives)": [2, 9, 16],
+            "Tolérance (augmentation de l'intensité et du volume d'entraînement)": [3, 10, 17],
+            "Manque de contrôle (incapacité à limiter l'exercice)": [4, 11, 18],
+            "Réduction des autres activités (impact sur la vie sociale/professionnelle)": [5, 12, 19],
+            "Temps (temps excessif consacré au sport)": [6, 13, 20],
+            "Intention (pratique plus importante que prévue)": [7, 14, 21]
         };
 
         let currentQuestionIndex = 0;
@@ -198,6 +198,12 @@
             document.getElementById("results").classList.remove("hidden");
             document.getElementById("info-form").classList.remove("hidden");
             document.getElementById("date").value = new Date().toLocaleDateString();
+
+            // Défilement vers les résultats
+            window.scrollTo({
+                top: document.getElementById("results").offsetTop,
+                behavior: "smooth"
+            });
         }
 
         window.onload = createQuestions;
