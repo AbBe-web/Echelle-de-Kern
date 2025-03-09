@@ -182,8 +182,11 @@
 
             let resultText = "";
             Object.keys(scores).forEach(cat => {
-                let sum = scores[cat].reduce((a, b) => a + b, 0);
-                resultText += `<strong>${cat} :</strong> ${sum}/6<br>`;
+    let sum = scores[cat].reduce((a, b) => a + b, 0);  // Somme des scores
+    let avg = sum / scores[cat].length;  // Moyenne sur la sous-dimension
+    resultText += `<strong>${cat} :</strong> ${avg.toFixed(2)} / 6<br>`;
+});
+
             });
 
             document.getElementById("result-text").innerHTML = resultText + 
