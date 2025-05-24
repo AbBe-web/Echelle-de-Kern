@@ -22,7 +22,7 @@
             z-index: 1000;
         }
         .container {
-            margin-top: 100px; /* Ajuste pour éviter que le texte ne soit caché sous l'intro fixe */
+            margin-top: 100px;
             max-width: 600px;
             margin: 20px auto;
             background: white;
@@ -36,7 +36,7 @@
         .intro {
             text-align: justify;
             font-size: 14px;
-            margin-top: 20px; /* Ajout d'une marge pour éviter de masquer le titre */
+            margin-top: 20px;
         }
         .question {
             margin-bottom: 15px;
@@ -57,6 +57,41 @@
         }
         button:hover {
             background: #218838;
+        }
+        @media print {
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+                font-size: 10px;
+            }
+            .container {
+                margin: 0;
+                padding: 5px;
+                border: none;
+                box-shadow: none;
+            }
+            h1, h2 {
+                font-size: 14px;
+                margin: 5px 0;
+            }
+            .intro {
+                font-size: 10px;
+                margin: 5px 0;
+            }
+            .question {
+                margin-bottom: 5px;
+            }
+            button {
+                display: none;
+            }
+            #info-form {
+                margin-top: 5px;
+            }
+            #info-form input {
+                width: 100px;
+            }
         }
     </style>
 </head>
@@ -82,7 +117,7 @@
             <label>Prénom :</label>
             <input type="text" id="prenom">
             <label>Date : <input type="text" id="date" readonly></label>
-            <button onclick="window.print()">À Imprimer</button>
+            <button onclick="window.print()">Imprimer les Résultats</button>
         </div>
     </div>
     <script>
@@ -148,7 +183,6 @@
                 document.querySelectorAll(`input[name="q${currentQuestionIndex}"]`).forEach(input => {
                     input.addEventListener("change", handleAnswer);
                 });
-                // Utilisation de window.scrollTo pour un défilement fluide
                 window.scrollTo({
                     top: questionDiv.offsetTop,
                     behavior: "smooth"
@@ -217,7 +251,6 @@
             document.getElementById("info-form").classList.remove("hidden");
             document.getElementById("date").value = new Date().toLocaleDateString();
 
-            // Défilement vers les résultats
             window.scrollTo({
                 top: document.getElementById("results").offsetTop,
                 behavior: "smooth"
