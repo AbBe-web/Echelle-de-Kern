@@ -202,11 +202,11 @@
             });
 
             if (riskCount >= 3) {
-                resultText += "<p><strong>Vos réponses indiquent que vous êtes à risque de dépendance au sport selon Hausenblas et al. (2). Les 3 catégories possibles sont à risque de dépendance, symptomatique non dépendant et asymptomatique non dépendant.</strong></p>";
+                resultText += "<p><strong>Vos réponses indiquent que vous êtes à risque de dépendance au sport selon Hausenblas et al. (2). Les 3 catégories possibles sont à risque de dépendance (scores ≥ 5/6 sur ≥3 sous-échelles), symptomatique non dépendant (scores ≥ 3/6 sur ≥3 sous-échelles) et asymptomatique non dépendant (critères des autres catégories non remplis).</strong></p>";
             } else if (symptomCount >= 3) {
-                resultText += "<p><strong>Vos réponses indiquent que vous appartenez à la catégorie des répondants symptomatiques non dépendants selon Hausenblas et al. (2). Les 3 catégories possibles sont à risque de dépendance, symptomatique non dépendant et asymptomatique non dépendant.</strong></p>";
+                resultText += "<p><strong>Vos réponses indiquent que vous appartenez à la catégorie des répondants symptomatiques non dépendants selon Hausenblas et al. (2). Les 3 catégories possibles sont à risque de dépendance (scores ≥ 5/6 sur ≥3 sous-échelles), symptomatique non dépendant (scores ≥ 3/6 sur ≥3 sous-échelles) et asymptomatique non dépendant (critères des autres catégories non remplis).</strong></p>";
             } else {
-                resultText += "<p><strong>Vos réponses indiquent que vous appartenez à la catégorie des répondants asymptomatiques non dépendants selon Hausenblas et al. (2). Les 3 catégories possibles sont à risque de dépendance, symptomatique non dépendant et asymptomatique non dépendant.</strong></p>";
+                resultText += "<p><strong>Vos réponses indiquent que vous appartenez à la catégorie des répondants asymptomatiques non dépendants selon Hausenblas et al. (2). Les 3 catégories possibles sont à risque de dépendance (scores ≥ 5/6 sur ≥3 sous-échelles), symptomatique non dépendant (scores ≥ 3/6 sur ≥3 sous-échelles) et asymptomatique non dépendant (critères des autres catégories non remplis).</strong></p>";
             }
 
             document.getElementById("result-text").innerHTML = resultText +
